@@ -1,0 +1,5 @@
+public static void insert(ArrayList<Integer>heap,int key){
+    heap.add(key);
+    int x=heap.size()-1;
+    while(x>=)
+}

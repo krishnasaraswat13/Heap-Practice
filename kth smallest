@@ -1,0 +1,12 @@
+public static int kthSmallest(int[] nums, int k) {
+        // Your code here
+         PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->b-a);
+        int n=nums.length;
+       for(int i=0;i<n;i++){
+        pq.add(nums[i]);
+        if(pq.size()>k){
+            pq.poll();
+        }
+       }
+       return pq.poll();
+    }
