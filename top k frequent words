@@ -1,0 +1,32 @@
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        // Step 1: Count frequencies
+        Map<String, Integer> freqMap = new HashMap<>();
+        for (String word : words) {
+            freqMap.put(word, freqMap.getOrDefault(word, 0) + 1);
+        }
+
+        // Step 2: Min-heap with custom comparator
+        PriorityQueue<String> pq = new PriorityQueue<>((a,b)->freqMap.get(a)-freqMap.get(b)==0?b.compareTo(a):freqMap.get(a)-freqMap.get(b));
+       
+
+        // Step 3: Keep top k elements in heap
+        for (String word : freqMap.keySet()) {
+            pq.offer(word);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        // Step 4: Extract from heap and reverse for correct order
+        LinkedList<String> result = new LinkedList<>();
+        while (!pq.isEmpty()) {
+            result.addFirst(pq.poll());
+        }
+
+        return result;
+    }
+}
+//list return krne me linked list bhi return 
+// kar sakte hain or pq me store me directly word store
+//  krke compare me map me jaake compare kr skte hain

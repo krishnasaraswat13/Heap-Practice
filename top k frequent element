@@ -1,0 +1,60 @@
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        if (nums.length==0) return new int[0]; 
+        PriorityQueue<int []>pq=new PriorityQueue<>((a,b)->a[0]-b[0]);
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            pq.add(new int[]{entry.getValue(), entry.getKey()});
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        int res[]=new int[k];
+        int i=0;
+       while(!pq.isEmpty()){
+            res[i++]=pq.poll()[1];
+        }
+        return res;
+    }
+}
+
+
+//gfg
+class Solution {
+    public ArrayList<Integer> topKFrequent(int[] nums, int k) {
+        // Your code here
+       if (nums.length==0) return new ArrayList<>(); 
+        PriorityQueue<int []>pq=new PriorityQueue<>((a, b) -> {
+    if (a[0] == b[0]) return a[1] - b[1]; // evict smaller number first
+    return a[0] - b[0]; // lower frequency first
+});
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            pq.add(new int[]{entry.getValue(), entry.getKey()});
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+       ArrayList<Integer> res=new ArrayList<>();
+       
+       while(!pq.isEmpty()){
+            res.add(pq.poll()[1]);
+        }
+       res.sort((a, b) -> {
+    int freqA = map.get(a);
+    int freqB = map.get(b);
+    if (freqA == freqB) return b-a; // smaller value first
+    return freqB - freqA; // higher frequency first
+});
+
+        return res;
+    }
+}

@@ -1,7 +1,9 @@
+//k closest elements
+
 class Solution {
     int[] printKClosest(int[] arr, int k, int x) {
         // code here
-        PriorityQueue<int []>pq=new PriorityQueue<>((a,b)->b[0]==a[0]?a[1]-b[1]:b[0]-a[0]);
+        PriorityQueue<int []>pq=new PriorityQueue<>((a,b)->b[0]==a[0]?a[1]-b[1]:b[0]-a[0]);//a1-b1 bcz prefer larger if same but in platform like leetcode we need to prefer smaller so in those cases take b1-a1
         for(int i=0;i<arr.length;i++){
             if(arr[i]==x){
                 continue;

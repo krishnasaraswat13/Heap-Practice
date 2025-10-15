@@ -1,0 +1,20 @@
+class Solution {
+    public int nthUglyNumber(int n) {
+   PriorityQueue<Long> pq=new PriorityQueue<>();
+        Set<Long> visited=new HashSet<>();
+        long factors[]={2,3,5};
+        pq.add(1L);
+        visited.add(1L);
+        for(int i=2;i<=n;i++){
+            long ele=pq.poll();
+            for(long factor:factors){
+                if(!visited.contains(factor*ele)){
+                    pq.add(factor*ele);
+                    visited.add(factor*ele);
+                }
+            }
+        }
+        long ugly=pq.poll();
+        return (int)ugly;
+    }
+}
